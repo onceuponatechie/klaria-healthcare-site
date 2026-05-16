@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable react/no-unescaped-entities, @next/next/no-img-element */
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, MessageCircle, Calendar, BadgeCheck } from "lucide-react";
 import { PageShell, Reveal, SectionEyebrow } from "@/components/site/PageShell";
@@ -11,7 +10,7 @@ export default function Contact() {
         <Reveal className="max-w-3xl space-y-5">
           <SectionEyebrow>Get in touch</SectionEyebrow>
           <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tighter text-foreground text-balance leading-[0.95]">
-            Let's get you booked.
+            Let&apos;s get you booked.
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl">
             Pick the channel that works best — phone, message, or just walk into the calendar below and grab a slot.

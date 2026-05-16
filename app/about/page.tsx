@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable react/no-unescaped-entities, @next/next/no-img-element */
 import { motion } from "framer-motion";
 import { Sparkles, HeartHandshake, Eye, Leaf, Shield, Lightbulb } from "lucide-react";
 import { PageShell, Reveal, SectionEyebrow } from "@/components/site/PageShell";
@@ -77,7 +76,7 @@ function Story() {
       <Reveal className="lg:col-span-5 space-y-4">
         <SectionEyebrow>Mission</SectionEyebrow>
         <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground text-balance">
-          Healthcare you'd recommend to your closest friend.
+          Healthcare you&apos;d recommend to your closest friend.
         </h2>
       </Reveal>
       <div className="lg:col-span-7 space-y-3 text-xl text-foreground/80 leading-relaxed">

@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable react/no-unescaped-entities, @next/next/no-img-element */
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -133,7 +132,7 @@ function Newsletter() {
             Subscribe
           </motion.button>
         </form>
-        {done && <p className="mt-3 text-sm text-primary">You're in. See you Sunday.</p>}
+        {done && <p className="mt-3 text-sm text-primary">You&apos;re in. See you Sunday.</p>}
       </div>
     </section>
   );

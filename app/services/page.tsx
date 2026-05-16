@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities, @next/next/no-img-element */
-
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
@@ -79,7 +79,7 @@ export default function Services() {
                 className="rounded-3xl bg-card border border-border overflow-hidden shadow-soft"
               >
                 <div className="aspect-[16/9] overflow-hidden">
-                  <img src={current.img.src} alt={current.name} className="w-full h-full object-cover" loading="lazy" />
+                  <Image src={current.img} alt={current.name} className="w-full h-full object-cover" loading="lazy" />
                 </div>
                 <div className="p-7 sm:p-10 space-y-6">
                   <div className="flex flex-wrap items-center gap-3 text-sm">

@@ -1,6 +1,5 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities, @next/next/no-img-element */
-
 import { motion } from "framer-motion";
 import { Sparkles, HeartHandshake, Eye, Leaf, Shield, Lightbulb } from "lucide-react";
 import { PageShell, Reveal, SectionEyebrow } from "@/components/site/PageShell";

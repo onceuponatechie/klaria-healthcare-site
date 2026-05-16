@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable react/no-unescaped-entities, @next/next/no-img-element */
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
@@ -375,7 +374,7 @@ function TrustMarquee() {
       <Reveal className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 pb-4 flex items-center gap-3">
         <span className="h-px flex-1 bg-gradient-to-r from-transparent to-border" />
         <p className="text-xs sm:text-sm uppercase tracking-[0.25em] text-muted-foreground font-semibold">
-          Accredited & trusted by the world's leading networks
+          Accredited & trusted by the world&apos;s leading networks
         </p>
         <span className="h-px flex-1 bg-gradient-to-l from-transparent to-border" />
       </Reveal>
@@ -817,7 +816,7 @@ function DoctorsMarquee() {
         <Reveal className="lg:col-span-7 space-y-4">
           <SectionEyebrow>The people behind your care</SectionEyebrow>
           <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tighter text-foreground text-balance leading-[0.95]">
-            Specialists you'd recommend to your <Underlined>mother</Underlined>.
+            Specialists you&apos;d recommend to your <Underlined>mother</Underlined>.
           </h2>
         </Reveal>
         <Reveal delay={0.1} className="lg:col-span-5">
@@ -1012,7 +1011,7 @@ function Testimonials() {
               <Quote className="absolute top-8 right-8 w-20 h-20 text-primary/10" />
               <div className="relative">
                 <p className="text-2xl sm:text-3xl font-display font-semibold text-foreground leading-snug tracking-tight text-balance">
-                  "{r.quote}"
+                  &quot;{r.quote}&quot;
                 </p>
                 <div className="mt-8 flex items-center justify-between gap-4 border-t border-border pt-6">
                   <div className="flex items-center gap-4">
@@ -1241,7 +1240,7 @@ function FAQ() {
             Questions, gently answered.
           </h2>
           <p className="text-muted-foreground text-lg">
-            Can't find what you're looking for? Our care team is one tap away on
+            Can&apos;t find what you&apos;re looking for? Our care team is one tap away on
             WhatsApp.
           </p>
         </Reveal>
@@ -1310,7 +1309,7 @@ function FinalCTA() {
               Your healthier next chapter starts with a conversation.
             </h2>
             <p className="text-primary-foreground/85 text-lg max-w-md">
-              Pick a time that suits you. We'll handle the rest — paperwork,
+              Pick a time that suits you. We&apos;ll handle the rest — paperwork,
               reminders, follow-ups.
             </p>
             <ul className="grid gap-2 text-sm text-primary-foreground/90">

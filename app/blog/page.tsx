@@ -1,6 +1,5 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities, @next/next/no-img-element */
-
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";

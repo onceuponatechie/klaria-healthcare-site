@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities, @next/next/no-img-element */
-
+import Image from "next/image";
 import { use } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -53,7 +53,7 @@ export default function Post({ params }: { params: Promise<{ slug: string }> }) 
         </Reveal>
         <Reveal delay={0.1} className="my-10">
           <div className="aspect-[16/9] rounded-3xl overflow-hidden shadow-float">
-            <img src={post.img.src} alt={post.title} className="w-full h-full object-cover" />
+            <Image src={post.img.src} alt={post.title} className="w-full h-full object-cover" />
           </div>
         </Reveal>
         <div className="space-y-6 text-lg text-foreground/85 leading-relaxed">

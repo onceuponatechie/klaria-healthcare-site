@@ -1,5 +1,6 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities, @next/next/no-img-element */
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -177,8 +178,8 @@ function Hero() {
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="relative aspect-[4/5] sm:aspect-[5/6] rounded-[2rem] overflow-hidden shadow-float"
             >
-              <img
-                src={heroConsult.src}
+              <Image
+                src={heroConsult}
                 alt="Doctor with patient at Klaria Health"
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -463,8 +464,8 @@ function ShowDontTellCards() {
           transition={{ type: "spring", stiffness: 250 }}
           className="group relative aspect-[4/5] h-full rounded-[1.75rem] overflow-hidden shadow-soft"
         >
-          <img
-            src={whyCalm.src}
+          <Image
+            src={whyCalm}
             alt="Calm modern clinic interior"
             loading="lazy"
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -524,8 +525,8 @@ function ShowDontTellCards() {
           </p>
 
           <div className="relative mt-4 -mx-6 -mb-6 flex-1 rounded-b-[1.75rem] overflow-hidden bg-primary-soft">
-            <img
-              src={whyDoctor.src}
+            <Image
+              src={whyDoctor}
               alt="Klaria specialist"
               loading="lazy"
               className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[110%] object-cover object-top"
@@ -755,8 +756,8 @@ function ServicesHighlight() {
                 transition={{ duration: 0.5 }}
                 className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-float"
               >
-                <img
-                  src={it.img.src}
+                <Image
+                  src={it.img}
                   alt={it.eyebrow}
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover"
@@ -882,8 +883,8 @@ function DoctorsMarquee() {
               whileHover={{ y: -6, scale: 1.02 }}
               className="relative w-[180px] sm:w-[220px] aspect-[5/3] rounded-2xl overflow-hidden shadow-soft shrink-0"
             >
-              <img
-                src={d.img.src}
+              <Image
+                src={d.img}
                 alt=""
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover"
@@ -970,8 +971,8 @@ function Testimonials() {
                 whileHover={{ y: -3 }}
                 className={`relative rounded-full overflow-hidden ring-2 transition-all ${active === i ? "ring-primary w-14 h-14" : "ring-transparent w-12 h-12 opacity-60 hover:opacity-100"}`}
               >
-                <img
-                  src={rev.img.src}
+                <Image
+                  src={rev.img}
                   alt={rev.name}
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -1015,8 +1016,8 @@ function Testimonials() {
                 </p>
                 <div className="mt-8 flex items-center justify-between gap-4 border-t border-border pt-6">
                   <div className="flex items-center gap-4">
-                    <img
-                      src={r.img.src}
+                    <Image
+                      src={r.img}
                       alt={r.name}
                       className="w-14 h-14 rounded-full object-cover ring-2 ring-primary/20"
                       loading="lazy"
@@ -1125,8 +1126,8 @@ function BlogGrid() {
             transition={{ type: "spring", stiffness: 200 }}
             className="group relative overflow-hidden rounded-[2rem] aspect-[16/9] sm:aspect-[21/9] shadow-float"
           >
-            <img
-              src={featured.img.src}
+            <Image
+              src={featured.img}
               alt={featured.title}
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"

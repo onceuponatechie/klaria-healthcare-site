@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable react/no-unescaped-entities, @next/next/no-img-element */
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";

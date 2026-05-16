@@ -31,8 +31,8 @@ export default function PostContent({ params }: { params: Promise<{ slug: string
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tighter text-foreground text-balance leading-[1]">{post.title}</h1>
         </Reveal>
         <Reveal delay={0.1} className="my-10">
-          <div className="aspect-[16/9] rounded-3xl overflow-hidden shadow-float">
-            <Image src={post.img.src} alt={post.title} className="w-full h-full object-cover" />
+          <div className="relative aspect-[16/9] rounded-3xl overflow-hidden shadow-float">
+            <Image src={post.img.src} alt={post.title} fill className="object-cover" />
           </div>
         </Reveal>
         <div className="space-y-6 text-lg text-foreground/85 leading-relaxed">

@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
+import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">
         <QueryClientProvider client={queryClient}>
           <div className="min-h-screen bg-background text-foreground">
+            <SmoothScroll />
             <Navbar />
             <AnimatePresence mode="wait">
               <div key={pathname}>{children}</div>

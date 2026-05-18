@@ -1,9 +1,51 @@
 "use client";
-import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, MessageCircle, Calendar, BadgeCheck } from "lucide-react";
+
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  Calendar,
+  BadgeCheck,
+  MessageCircle,
+} from "lucide-react";
 import { PageShell, Reveal, SectionEyebrow } from "@/components/site/PageShell";
 
 export default function ContactContent() {
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [specialty, setSpecialty] = useState("Family Medicine");
+  const [confirmed, setConfirmed] = useState(false);
+
+  const dates = [
+    { d: "Mon", n: "8", m: "Jun", full: "Mon, Jun 8" },
+    { d: "Tue", n: "9", m: "Jun", full: "Tue, Jun 9" },
+    { d: "Wed", n: "10", m: "Jun", full: "Wed, Jun 10" },
+    { d: "Thu", n: "11", m: "Jun", full: "Thu, Jun 11" },
+  ];
+
+  const times = ["09:00", "10:30", "11:30", "13:00", "14:30", "16:00", "17:00", "17:30"];
+
+  const canConfirm = selectedDate && selectedTime && name.trim() && email.trim() && !confirmed;
+
+  const handleConfirm = () => {
+    if (!canConfirm) return;
+    setConfirmed(true);
+  };
+
+  const buttonLabel = () => {
+    if (canConfirm) return "Confirm appointment";
+    if (!selectedDate) return "Pick a date";
+    if (!selectedTime) return "Pick a time";
+    if (!name.trim()) return "Add your name";
+    if (!email.trim()) return "Add your email";
+    return "Confirm appointment";
+  };
+
   return (
     <PageShell>
       <section className="max-w-6xl mx-auto px-5 sm:px-8 pt-6 pb-12">
@@ -13,7 +55,7 @@ export default function ContactContent() {
             Let&apos;s get you booked.
           </h1>
           <p className="text-lg text-muted-foreground max-w-xl">
-            Pick the channel that works best — phone, message, or just walk into the calendar below and grab a slot.
+            Pick the channel that works best. Phone, message, or just walk into the calendar below and grab a slot.
           </p>
         </Reveal>
       </section>
@@ -67,60 +109,153 @@ export default function ContactContent() {
               </div>
             </div>
 
-            <div className="space-y-5">
-              <div>
-                <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-3">Choose a date</p>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {[
-                    { d: "Mon", n: "8", m: "Jun" },
-                    { d: "Tue", n: "9", m: "Jun" },
-                    { d: "Wed", n: "10", m: "Jun" },
-                    { d: "Thu", n: "11", m: "Jun" },
-                  ].map((s, i) => (
-                    <button key={s.n} className={`rounded-xl border px-3 py-3 text-left transition-all ${i === 1 ? "bg-primary text-primary-foreground border-primary" : "border-border hover:border-primary"}`}>
-                      <p className={`text-xs ${i === 1 ? "text-primary-foreground/80" : "text-muted-foreground"}`}>{s.d}</p>
-                      <p className="text-lg font-bold">{s.n}</p>
-                      <p className={`text-xs ${i === 1 ? "text-primary-foreground/80" : "text-muted-foreground"}`}>{s.m}</p>
-                    </button>
-                  ))}
-                </div>
-              </div>
+            <AnimatePresence mode="wait">
+              {confirmed ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="py-12 text-center space-y-4"
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary-soft text-primary mx-auto">
+                    <BadgeCheck className="w-8 h-8" />
+                  </div>
+                  <p className="font-display font-bold text-2xl text-foreground">
+                    Booked, {name.split(" ")[0]}!
+                  </p>
+                  <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed">
+                    We&apos;ll send you a confirmation for{" "}
+                    <span className="font-semibold text-foreground">
+                      {selectedDate} at {selectedTime}
+                    </span>{" "}
+                    with {specialty} in the next 2 minutes.
+                  </p>
+                  <button
+                    onClick={() => {
+                      setConfirmed(false);
+                      setSelectedDate(null);
+                      setSelectedTime(null);
+                      setName("");
+                      setEmail("");
+                      setSpecialty("Family Medicine");
+                    }}
+                    className="text-sm text-primary font-semibold hover:underline pt-3"
+                  >
+                    Book another time
+                  </button>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-5"
+                >
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-3">
+                      Choose a date
+                    </p>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {dates.map((s) => {
+                        const isSelected = selectedDate === s.full;
+                        return (
+                          <button
+                            key={s.n}
+                            onClick={() => setSelectedDate(s.full)}
+                            className={`rounded-xl border px-3 py-3 text-left transition-all ${
+                              isSelected
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "border-border hover:border-primary"
+                            }`}
+                          >
+                            <p className={`text-xs ${isSelected ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
+                              {s.d}
+                            </p>
+                            <p className="text-lg font-bold">{s.n}</p>
+                            <p className={`text-xs ${isSelected ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
+                              {s.m}
+                            </p>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
 
-              <div>
-                <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-3">Available times</p>
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-                  {["09:00", "10:30", "11:30", "13:00", "14:30", "16:00", "17:00", "17:30"].map((t, i) => (
-                    <button key={t} className={`rounded-lg px-2 py-3 text-sm font-semibold transition-colors ${i === 2 ? "bg-foreground text-background" : "bg-secondary text-foreground hover:bg-primary-soft hover:text-primary"}`}>
-                      {t}
-                    </button>
-                  ))}
-                </div>
-              </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground font-semibold mb-3">
+                      Available times
+                    </p>
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                      {times.map((t) => {
+                        const isSelected = selectedTime === t;
+                        return (
+                          <button
+                            key={t}
+                            onClick={() => setSelectedTime(t)}
+                            className={`rounded-lg px-2 py-3 text-sm font-semibold transition-colors ${
+                              isSelected
+                                ? "bg-foreground text-background"
+                                : "bg-secondary text-foreground hover:bg-primary-soft hover:text-primary"
+                            }`}
+                          >
+                            {t}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
 
-              <div className="grid sm:grid-cols-2 gap-3">
-                <input className="rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:border-primary" placeholder="Your name" />
-                <input type="email" className="rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:border-primary" placeholder="Email" />
-              </div>
-              <select className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:border-primary">
-                <option>Family Medicine</option>
-                <option>Dentistry</option>
-                <option>Optometry</option>
-                <option>Physiotherapy</option>
-                <option>Pediatrics</option>
-                <option>Cardiology</option>
-              </select>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <input
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:border-primary"
+                      placeholder="Your name"
+                    />
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:border-primary"
+                      placeholder="Email"
+                    />
+                  </div>
+                  <select
+                    value={specialty}
+                    onChange={(e) => setSpecialty(e.target.value)}
+                    className="w-full rounded-xl border border-border bg-background px-4 py-3 focus:outline-none focus:border-primary"
+                  >
+                    <option>Family Medicine</option>
+                    <option>Dentistry</option>
+                    <option>Optometry</option>
+                    <option>Physiotherapy</option>
+                    <option>Pediatrics</option>
+                    <option>Cardiology</option>
+                  </select>
 
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full rounded-2xl bg-primary text-primary-foreground py-4 font-semibold shadow-glass"
-              >
-                Confirm appointment
-              </motion.button>
-              <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-                <BadgeCheck className="w-4 h-4 text-primary" /> Powered by Calendly · Free 24h cancellation
-              </p>
-            </div>
+                  <motion.button
+                    onClick={handleConfirm}
+                    disabled={!canConfirm}
+                    whileHover={canConfirm ? { scale: 1.02 } : undefined}
+                    whileTap={canConfirm ? { scale: 0.98 } : undefined}
+                    className={`w-full rounded-2xl py-4 font-semibold transition-colors ${
+                      canConfirm
+                        ? "bg-primary text-primary-foreground shadow-glass hover:bg-primary/90 cursor-pointer"
+                        : "bg-primary/40 text-primary-foreground/60 cursor-not-allowed"
+                    }`}
+                  >
+                    {buttonLabel()}
+                  </motion.button>
+                  <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                    <BadgeCheck className="w-4 h-4 text-primary" /> Free 24h cancellation · No card required
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </Reveal>
       </section>

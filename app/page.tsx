@@ -816,7 +816,8 @@ function DoctorsMarquee() {
         <Reveal className="lg:col-span-7 space-y-4">
           <SectionEyebrow>The people behind your care</SectionEyebrow>
           <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tighter text-foreground text-balance leading-[0.95]">
-            Specialists you&apos;d recommend to your <Underlined>mother</Underlined>.
+            Specialists you&apos;d recommend to your{" "}
+            <Underlined>mother</Underlined>.
           </h2>
         </Reveal>
         <Reveal delay={0.1} className="lg:col-span-5">
@@ -1240,8 +1241,8 @@ function FAQ() {
             Questions, gently answered.
           </h2>
           <p className="text-muted-foreground text-lg">
-            Can&apos;t find what you&apos;re looking for? Our care team is one tap away on
-            WhatsApp.
+            Can&apos;t find what you&apos;re looking for? Our care team is one
+            tap away on WhatsApp.
           </p>
         </Reveal>
         <div className="lg:col-span-7 space-y-3">
@@ -1297,6 +1298,20 @@ function FAQ() {
 
 /* ---------- FINAL CTA ---------- */
 function FinalCTA() {
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [confirmed, setConfirmed] = useState(false);
+
+  const dates = ["Mon, Jun 8", "Tue, Jun 9", "Wed, Jun 10", "Thu, Jun 11"];
+  const times = ["09:00", "10:30", "13:00", "14:30", "16:00", "17:30"];
+
+  const canConfirm = selectedDate && selectedTime && !confirmed;
+
+  const handleConfirm = () => {
+    if (!canConfirm) return;
+    setConfirmed(true);
+  };
+
   return (
     <section className="px-5 sm:px-8 py-16">
       <div className="relative overflow-hidden max-w-6xl mx-auto rounded-[2rem] bg-gradient-to-br from-primary to-[oklch(0.55_0.18_240)] text-primary-foreground p-8 sm:p-14">
@@ -1309,8 +1324,8 @@ function FinalCTA() {
               Your healthier next chapter starts with a conversation.
             </h2>
             <p className="text-primary-foreground/85 text-lg max-w-md">
-              Pick a time that suits you. We&apos;ll handle the rest — paperwork,
-              reminders, follow-ups.
+              Pick a time that suits you. We&apos;ll handle the rest —
+              paperwork, reminders, follow-ups.
             </p>
             <ul className="grid gap-2 text-sm text-primary-foreground/90">
               <li className="flex gap-2 items-center">
@@ -1326,50 +1341,114 @@ function FinalCTA() {
           </Reveal>
           <Reveal delay={0.1} className="lg:col-span-6">
             <div className="rounded-2xl bg-background/95 text-foreground p-6 shadow-float">
-              <p className="font-display font-semibold text-foreground/80 mb-3">
-                Schedule online
-              </p>
-              <div className="grid sm:grid-cols-2 gap-3 mb-4">
-                {["Mon, Jun 8", "Tue, Jun 9", "Wed, Jun 10", "Thu, Jun 11"].map(
-                  (d, i) => (
-                    <motion.button
-                      key={d}
-                      whileHover={{ y: -2, borderColor: "var(--primary)" }}
-                      className={`rounded-xl border border-border px-4 py-3 text-sm font-semibold text-left transition-colors ${i === 1 ? "border-primary text-primary" : "text-foreground"}`}
+              <AnimatePresence mode="wait">
+                {confirmed ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="py-8 text-center space-y-3"
+                  >
+                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary-soft text-primary mx-auto">
+                      <BadgeCheck className="w-7 h-7" />
+                    </div>
+                    <p className="font-display font-bold text-xl text-foreground">
+                      Booked!
+                    </p>
+                    <p className="text-sm text-muted-foreground max-w-xs mx-auto">
+                      We&apos;ll send you a confirmation for{" "}
+                      <span className="font-semibold text-foreground">
+                        {selectedDate} at {selectedTime}
+                      </span>{" "}
+                      in 2 minutes.
+                    </p>
+                    <button
+                      onClick={() => {
+                        setConfirmed(false);
+                        setSelectedDate(null);
+                        setSelectedTime(null);
+                      }}
+                      className="text-xs text-primary font-semibold hover:underline pt-2"
                     >
-                      {d}
-                    </motion.button>
-                  ),
-                )}
-              </div>
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-5">
-                {["09:00", "10:30", "13:00", "14:30", "16:00", "17:30"].map(
-                  (t, i) => (
+                      Book another time
+                    </button>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <p className="font-display font-semibold text-foreground/80 mb-3">
+                      Schedule online
+                    </p>
+                    <div className="grid sm:grid-cols-2 gap-3 mb-4">
+                      {dates.map((d) => {
+                        const isSelected = selectedDate === d;
+                        return (
+                          <motion.button
+                            key={d}
+                            onClick={() => setSelectedDate(d)}
+                            whileHover={{ y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                            className={`rounded-xl border px-4 py-3 text-sm font-semibold text-left transition-colors ${
+                              isSelected
+                                ? "border-primary text-primary bg-primary-soft"
+                                : "border-border text-foreground hover:border-primary/40"
+                            }`}
+                          >
+                            {d}
+                          </motion.button>
+                        );
+                      })}
+                    </div>
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-5">
+                      {times.map((t) => {
+                        const isSelected = selectedTime === t;
+                        return (
+                          <motion.button
+                            key={t}
+                            onClick={() => setSelectedTime(t)}
+                            whileHover={{ scale: 1.06 }}
+                            whileTap={{ scale: 0.95 }}
+                            className={`rounded-lg px-2 py-2 text-xs font-semibold transition-colors ${
+                              isSelected
+                                ? "bg-foreground text-background"
+                                : "bg-secondary text-foreground hover:bg-primary-soft"
+                            }`}
+                          >
+                            {t}
+                          </motion.button>
+                        );
+                      })}
+                    </div>
                     <motion.button
-                      key={t}
-                      whileHover={{ scale: 1.06 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`rounded-lg px-2 py-2 text-xs font-semibold transition-colors ${i === 1 ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground hover:bg-primary-soft"}`}
+                      onClick={handleConfirm}
+                      disabled={!canConfirm}
+                      whileHover={canConfirm ? { scale: 1.01 } : undefined}
+                      whileTap={canConfirm ? { scale: 0.99 } : undefined}
+                      className={`block w-full rounded-xl py-3 text-center font-semibold transition-colors ${
+                        canConfirm
+                          ? "bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
+                          : "bg-primary/40 text-primary-foreground/60 cursor-not-allowed"
+                      }`}
                     >
-                      {t}
+                      {canConfirm
+                        ? "Confirm appointment"
+                        : selectedDate
+                          ? "Pick a time"
+                          : "Pick a date"}
                     </motion.button>
-                  ),
+                    <p className="mt-3 text-xs text-muted-foreground text-center">
+                      Free to book · No card required
+                    </p>
+                  </motion.div>
                 )}
-              </div>
-              <motion.div
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
-              >
-                <Link
-                  href="/contact"
-                  className="block w-full rounded-xl bg-primary text-primary-foreground py-3 text-center font-semibold hover:bg-primary/90 transition-colors"
-                >
-                  Confirm appointment
-                </Link>
-              </motion.div>
-              <p className="mt-3 text-xs text-muted-foreground text-center">
-                Powered by Calendly · Free to book
-              </p>
+              </AnimatePresence>
             </div>
           </Reveal>
         </div>

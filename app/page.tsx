@@ -22,6 +22,7 @@ import {
   Heart,
   Users,
   Shield,
+  ArrowLeft,
 } from "lucide-react";
 import { PageShell, Reveal, SectionEyebrow } from "@/components/site/PageShell";
 import heroConsult from "@/assets/hero-consult.jpg";
@@ -1300,17 +1301,37 @@ function FAQ() {
 function FinalCTA() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [confirmed, setConfirmed] = useState(false);
+  const [email, setEmail] = useState("");
+  const [step, setStep] = useState<"picking" | "email" | "confirmed">("picking");
 
   const dates = ["Mon, Jun 8", "Tue, Jun 9", "Wed, Jun 10", "Thu, Jun 11"];
   const times = ["09:00", "10:30", "13:00", "14:30", "16:00", "17:30"];
 
-  const canConfirm = selectedDate && selectedTime && !confirmed;
+  const canMoveToEmail = selectedDate && selectedTime;
+  const canConfirm = email.trim().length > 3 && email.includes("@");
+
+  const handleMoveToEmail = () => {
+    if (!canMoveToEmail) return;
+    setStep("email");
+  };
 
   const handleConfirm = () => {
     if (!canConfirm) return;
-    setConfirmed(true);
+    setStep("confirmed");
   };
+
+  const handleReset = () => {
+    setSelectedDate(null);
+    setSelectedTime(null);
+    setEmail("");
+    setStep("picking");
+  };
+
+  const pickingButtonLabel = canMoveToEmail
+    ? "Confirm appointment"
+    : selectedDate
+      ? "Pick a time"
+      : "Pick a date";
 
   return (
     <section className="px-5 sm:px-8 py-16">
@@ -1324,8 +1345,8 @@ function FinalCTA() {
               Your healthier next chapter starts with a conversation.
             </h2>
             <p className="text-primary-foreground/85 text-lg max-w-md">
-              Pick a time that suits you. We&apos;ll handle the rest —
-              paperwork, reminders, follow-ups.
+              Pick a time that suits you. We&apos;ll handle the rest; paperwork,
+              reminders, follow-ups.
             </p>
             <ul className="grid gap-2 text-sm text-primary-foreground/90">
               <li className="flex gap-2 items-center">
@@ -1342,42 +1363,9 @@ function FinalCTA() {
           <Reveal delay={0.1} className="lg:col-span-6">
             <div className="rounded-2xl bg-background/95 text-foreground p-6 shadow-float">
               <AnimatePresence mode="wait">
-                {confirmed ? (
+                {step === "picking" && (
                   <motion.div
-                    key="success"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="py-8 text-center space-y-3"
-                  >
-                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary-soft text-primary mx-auto">
-                      <BadgeCheck className="w-7 h-7" />
-                    </div>
-                    <p className="font-display font-bold text-xl text-foreground">
-                      Booked!
-                    </p>
-                    <p className="text-sm text-muted-foreground max-w-xs mx-auto">
-                      We&apos;ll send you a confirmation for{" "}
-                      <span className="font-semibold text-foreground">
-                        {selectedDate} at {selectedTime}
-                      </span>{" "}
-                      in 2 minutes.
-                    </p>
-                    <button
-                      onClick={() => {
-                        setConfirmed(false);
-                        setSelectedDate(null);
-                        setSelectedTime(null);
-                      }}
-                      className="text-xs text-primary font-semibold hover:underline pt-2"
-                    >
-                      Book another time
-                    </button>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="form"
+                    key="picking"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -1427,6 +1415,60 @@ function FinalCTA() {
                       })}
                     </div>
                     <motion.button
+                      onClick={handleMoveToEmail}
+                      disabled={!canMoveToEmail}
+                      whileHover={canMoveToEmail ? { scale: 1.01 } : undefined}
+                      whileTap={canMoveToEmail ? { scale: 0.99 } : undefined}
+                      className={`block w-full rounded-xl py-3 text-center font-semibold transition-colors ${
+                        canMoveToEmail
+                          ? "bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer"
+                          : "bg-primary/40 text-primary-foreground/60 cursor-not-allowed"
+                      }`}
+                    >
+                      {pickingButtonLabel}
+                    </motion.button>
+                    <p className="mt-3 text-xs text-muted-foreground text-center">
+                      Free to book · No card required
+                    </p>
+                  </motion.div>
+                )}
+
+                {step === "email" && (
+                  <motion.div
+                    key="email"
+                    initial={{ opacity: 0, x: 12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -12 }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <button
+                      onClick={() => setStep("picking")}
+                      className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors mb-3"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" /> Back
+                    </button>
+                    <p className="font-display font-semibold text-foreground/80 mb-1">
+                      Almost there
+                    </p>
+                    <p className="text-sm text-muted-foreground mb-5">
+                      Booking{" "}
+                      <span className="font-semibold text-foreground">
+                        {selectedDate} at {selectedTime}
+                      </span>
+                      . Where should we send the confirmation?
+                    </p>
+                    <input
+                      type="email"
+                      autoFocus
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && canConfirm) handleConfirm();
+                      }}
+                      placeholder="you@example.com"
+                      className="w-full rounded-xl border border-border bg-background px-4 py-3 mb-4 focus:outline-none focus:border-primary"
+                    />
+                    <motion.button
                       onClick={handleConfirm}
                       disabled={!canConfirm}
                       whileHover={canConfirm ? { scale: 1.01 } : undefined}
@@ -1437,15 +1479,44 @@ function FinalCTA() {
                           : "bg-primary/40 text-primary-foreground/60 cursor-not-allowed"
                       }`}
                     >
-                      {canConfirm
-                        ? "Confirm appointment"
-                        : selectedDate
-                          ? "Pick a time"
-                          : "Pick a date"}
+                      {canConfirm ? "Confirm booking" : "Add your email"}
                     </motion.button>
                     <p className="mt-3 text-xs text-muted-foreground text-center">
-                      Free to book · No card required
+                      We only use this to send your confirmation.
                     </p>
+                  </motion.div>
+                )}
+
+                {step === "confirmed" && (
+                  <motion.div
+                    key="confirmed"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="py-8 text-center space-y-3"
+                  >
+                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary-soft text-primary mx-auto">
+                      <BadgeCheck className="w-7 h-7" />
+                    </div>
+                    <p className="font-display font-bold text-xl text-foreground">
+                      Booked!
+                    </p>
+                    <p className="text-sm text-muted-foreground max-w-xs mx-auto">
+                      We&apos;ll send a confirmation to{" "}
+                      <span className="font-semibold text-foreground">{email}</span>{" "}
+                      for{" "}
+                      <span className="font-semibold text-foreground">
+                        {selectedDate} at {selectedTime}
+                      </span>{" "}
+                      in 2 minutes.
+                    </p>
+                    <button
+                      onClick={handleReset}
+                      className="text-xs text-primary font-semibold hover:underline pt-2"
+                    >
+                      Book another time
+                    </button>
                   </motion.div>
                 )}
               </AnimatePresence>

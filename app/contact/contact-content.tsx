@@ -65,9 +65,9 @@ export default function ContactContent() {
           <div className="rounded-3xl bg-card border border-border p-7 shadow-soft space-y-5">
             <h2 className="text-2xl font-bold text-foreground">Reach us directly</h2>
             {[
-              { icon: Phone, label: "Phone", value: "+1 (555) 555-0123", href: "tel:+15555550123" },
+              { icon: Phone, label: "Phone", value: "+234 803 555 0123", href: "tel:+2348035550123" },
               { icon: Mail, label: "Email", value: "care@klaria.health", href: "mailto:care@klaria.health" },
-              { icon: MapPin, label: "Clinic", value: "240 Riverside Ave, Suite 12 · Brooklyn, NY 11201" },
+              { icon: MapPin, label: "Clinic", value: "12B Lugard Avenue · Ikoyi, Lagos" },
               { icon: Clock, label: "Hours", value: "Mon — Fri 8 — 19 · Sat 9 — 14" },
             ].map((it) => (
               <a
@@ -89,7 +89,7 @@ export default function ContactContent() {
           <div className="rounded-3xl overflow-hidden border border-border shadow-soft">
             <iframe
               title="Klaria clinic map"
-              src="https://www.google.com/maps?q=Brooklyn+Bridge+Park&output=embed"
+              src="https://www.google.com/maps?q=Lugard+Avenue+Ikoyi+Lagos&output=embed"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="w-full h-[300px] border-0"
@@ -262,7 +262,7 @@ export default function ContactContent() {
 
       <section className="px-5 sm:px-8 mt-12 mb-10">
         <motion.a
-          href="https://api.whatsapp.com/send?phone=15555550123&text=Hi%20Klaria%2C%20I%20need%20some%20help."
+          href="https://api.whatsapp.com/send?phone=2348035550123&text=Hi%20Klaria%2C%20I%20need%20some%20help."
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.01 }}

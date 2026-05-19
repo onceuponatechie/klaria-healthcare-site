@@ -49,7 +49,7 @@ export default function AboutContent() {
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mt-5 text-background/85 text-lg max-w-xl">
-                Founded in 2019 by patients who had simply had enough of forgetting that healthcare is about humans.
+                Founded in 2019 by patients who had simply had enough of forgetting that healthcare is the biggest priority.
               </p>
             </Reveal>
           </div>
@@ -67,8 +67,8 @@ function Story() {
   const lines = [
     "Klaria began with a simple, frustrating waiting room.",
     "Three hours, two strangers, one apology that never came.",
-    "We left convinced that modern healthcare deserved better defaults —",
-    "warmer rooms, shorter waits, doctors with time, prices you understand.",
+    "We left convinced that modern healthcare deserved better defaults.",
+    "Warmer rooms, shorter waits, doctors with time, prices you understand.",
     "Today, that conviction is our quiet operating system.",
   ];
   return (

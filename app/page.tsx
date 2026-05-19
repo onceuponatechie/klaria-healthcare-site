@@ -121,7 +121,7 @@ function Hero() {
           <Reveal delay={0.7}>
             <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
               A multi-specialty clinic where world-class doctors, calm spaces,
-              and intelligent technology come together — so you actually look
+              and intelligent technology come together , so you actually look
               forward to your appointment.
             </p>
           </Reveal>
@@ -162,7 +162,7 @@ function Hero() {
                   </span>
                 </div>
                 <p className="text-xs text-muted-foreground mt-0.5">
-                  Trusted by 8,400+ patients across Brooklyn
+                  Trusted by 8,400+ patients across Africa
                 </p>
               </div>
             </motion.div>
@@ -185,7 +185,7 @@ function Hero() {
               />
             </motion.div>
 
-            {/* Verified card — sits just above Next-available on mobile, bottom-left on desktop */}
+            {/* Verified card , sits just above Next-available on mobile, bottom-left on desktop */}
             <motion.div
               initial={{ opacity: 0, y: 20, x: -10 }}
               animate={{ opacity: 1, y: 0, x: 0 }}
@@ -206,7 +206,7 @@ function Hero() {
               </div>
             </motion.div>
 
-            {/* Live availability pill — top-right always */}
+            {/* Live availability pill , top-right always */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -220,12 +220,12 @@ function Hero() {
                   <span className="relative inline-flex rounded-full w-2.5 h-2.5 bg-emerald-500" />
                 </span>
                 <p className="text-[11px] sm:text-xs font-semibold text-foreground whitespace-nowrap">
-                  Open · 8AM — 7PM
+                  Open · 8AM , 7PM
                 </p>
               </div>
             </motion.div>
 
-            {/* Next available booking card — bottom on mobile too, but pushed below image, not overlapping verified */}
+            {/* Next available booking card , bottom on mobile too, but pushed below image, not overlapping verified */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -397,7 +397,7 @@ function TrustMarquee() {
   );
 }
 
-/* ---------- SHOW DON'T TELL — 3-card showcase (Why Klaria) ---------- */
+/* ---------- SHOW DON'T TELL , 3-card showcase (Why Klaria) ---------- */
 function ShowDontTell() {
   return (
     <section className="max-w-6xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
@@ -407,7 +407,7 @@ function ShowDontTell() {
           Care that finally <Underlined>feels</Underlined> modern.
         </h2>
         <p className="text-muted-foreground text-lg max-w-xl">
-          We rebuilt the clinic from the ground up — every wait, every form,
+          We rebuilt the clinic from the ground up , every wait, every form,
           every conversation.
         </p>
       </Reveal>
@@ -453,11 +453,11 @@ function ShowDontTell() {
   );
 }
 
-/* ---------- ShowDontTell — three equal-sized cards ---------- */
+/* ---------- ShowDontTell , three equal-sized cards ---------- */
 function ShowDontTellCards() {
   return (
     <div className="grid md:grid-cols-3 gap-4 sm:gap-5">
-      {/* CARD 1 — calm space photo */}
+      {/* CARD 1 , calm space photo */}
       <Reveal>
         <motion.div
           whileHover={{ y: -6 }}
@@ -497,12 +497,12 @@ function ShowDontTellCards() {
         </motion.div>
       </Reveal>
 
-      {/* CARD 2 — cycling stat showcase */}
+      {/* CARD 2 , cycling stat showcase */}
       <Reveal delay={0.1}>
         <CyclingStatCard />
       </Reveal>
 
-      {/* CARD 3 — Expert care with portrait */}
+      {/* CARD 3 , Expert care with portrait */}
       <Reveal delay={0.2}>
         <motion.div
           whileHover={{ y: -6 }}
@@ -562,19 +562,19 @@ const CYCLE_STATS = [
     value: 94,
     suffix: "%",
     title: "Patients leave smiling",
-    body: "Measured monthly. We share the number internally — and we obsess over moving it up.",
+    body: "Measured monthly. We share the number internally, and we obsess over moving it up.",
   },
   {
     value: 8400,
     suffix: "+",
     title: "Patients cared for",
-    body: "Across Brooklyn, Queens, and Manhattan since we opened our doors.",
+    body: "Across Africa and beyond since we opened our doors.",
   },
   {
     value: 12,
     suffix: "+",
     title: "Board-certified specialists",
-    body: "One collaborative team — never siloed, never rushed, never on autopilot.",
+    body: "One collaborative team; never siloed, never rushed, never on autopilot.",
   },
   {
     value: 4.9,
@@ -800,7 +800,7 @@ function DoctorsMarquee() {
   const team = [
     {
       img: act1,
-      name: "Dr. Amara Adeyemi",
+      name: "Dr. Amara Anosike",
       role: "Family Medicine",
       years: 12,
     },
@@ -823,8 +823,8 @@ function DoctorsMarquee() {
         </Reveal>
         <Reveal delay={0.1} className="lg:col-span-5">
           <p className="text-muted-foreground text-lg">
-            Meet the team in the middle of doing the thing they love most —
-            taking care of people. Hover any portrait to slow the slider.
+            Meet the team in the middle of doing the thing they love most,
+            taking care of people. Each specialist, a master at their craft.
           </p>
         </Reveal>
       </div>
@@ -904,7 +904,7 @@ function DoctorsMarquee() {
           href="/about"
           className="group inline-flex items-center gap-2 font-semibold text-foreground"
         >
-          Meet the full team{" "}
+          Meet the team{" "}
           <ArrowRight className="w-4 h-4 magnetic-arrow text-primary" />
         </Link>
       </Reveal>
@@ -916,18 +916,18 @@ function DoctorsMarquee() {
 function Testimonials() {
   const reviews = [
     {
-      name: "Amelia Roberts",
+      name: "Anu Adeboye",
       role: "Optometry · 2 visits",
       quote:
         "I forgot what going to a clinic without anxiety felt like. Klaria changed that on the very first visit.",
       img: doc1,
-      location: "Brooklyn, NY",
+      location: "Ikoyi, LG",
     },
     {
       name: "Marcus Tan",
       role: "Physiotherapy · 6 weeks",
       quote:
-        "Six weeks of recovery in three. They actually measure outcomes — and they actually care.",
+        "Six weeks of recovery in three. They actually measure outcomes , and followed up with real care.",
       img: doc2,
       location: "Queens, NY",
     },
@@ -937,7 +937,7 @@ function Testimonials() {
       quote:
         "Calm, beautiful, modern. My kids ask to come back. That's a first.",
       img: doc3,
-      location: "Manhattan, NY",
+      location: "Mumbai, IN",
     },
   ];
   const [active, setActive] = useState(0);
@@ -1063,7 +1063,7 @@ function Testimonials() {
   );
 }
 
-/* ---------- BLOG GRID — 1 large + 3 small ---------- */
+/* ---------- BLOG GRID , 1 large + 3 small ---------- */
 function BlogGrid() {
   const featured = {
     slug: "modern-clinics",
@@ -1073,7 +1073,7 @@ function BlogGrid() {
     read: "5 min",
     title: "Why we built a clinic that feels like a hotel lobby.",
     excerpt:
-      "Calm spaces aren't a luxury — they're medicine. The science behind designing healthcare for the nervous system.",
+      "Calm spaces aren't a luxury , they're medicine. The science behind designing healthcare for the nervous system.",
   };
   const small = [
     {
@@ -1098,7 +1098,7 @@ function BlogGrid() {
       cat: "Vision",
       date: "Apr 2, 2026",
       read: "5 min",
-      title: "Screen fatigue is real — here's what helps.",
+      title: "Screen fatigue is real , here's what helps.",
     },
   ];
 
@@ -1220,7 +1220,7 @@ function FAQ() {
     },
     {
       q: "What is your cancellation policy?",
-      a: "Free cancellation up to 24 hours before your appointment. Last-minute cancellations are fine for emergencies — just let us know.",
+      a: "Free cancellation up to 24 hours before your appointment. Last-minute cancellations are fine for emergencies , just let us know.",
     },
     {
       q: "Can I book for my child?",

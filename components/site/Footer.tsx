@@ -66,8 +66,8 @@ export function Footer() {
 
         <div className="lg:col-span-3 space-y-3 text-sm">
           <h4 className="text-xs uppercase tracking-widest text-background/50">Visit</h4>
-          <p className="flex gap-2 text-background/80"><MapPin className="w-4 h-4 mt-0.5 text-primary shrink-0" /> 240 Riverside Ave, Suite 12 Brooklyn, NY 11201</p>
-          <p className="flex gap-2 text-background/80"><Phone className="w-4 h-4 mt-0.5 text-primary shrink-0" /> +1 (555) 555-0123</p>
+          <p className="flex gap-2 text-background/80"><MapPin className="w-4 h-4 mt-0.5 text-primary shrink-0" /> 12B Lugard Avenue, Suite 12 Ikoyi, Lagos 11201</p>
+          <p className="flex gap-2 text-background/80"><Phone className="w-4 h-4 mt-0.5 text-primary shrink-0" /> +234 803 555 0123</p>
           <p className="flex gap-2 text-background/80"><Mail className="w-4 h-4 mt-0.5 text-primary shrink-0" /> care@klaria.health</p>
         </div>
 

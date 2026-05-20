@@ -14,7 +14,7 @@ import {
   BadgeCheck,
   HeartPulse,
   Microscope,
-  PlayCircle,
+  MessagesSquare,
   CalendarCheck,
   ChevronDown,
   Quote,
@@ -130,8 +130,8 @@ function Hero() {
             <MagneticButton to="/contact" primary>
               Book Your Visit
             </MagneticButton>
-            <MagneticButton to="#story">
-              <PlayCircle className="w-5 h-5 text-primary" /> Watch Our Story
+            <MagneticButton to="https://api.whatsapp.com/send?phone=2348035550123&text=Hi%20Klaria%2C%20I%27d%20like%20to%20talk%20to%20a%20doctor.">
+              <MessagesSquare className="w-5 h-5 text-primary" /> Talk to a Doctor
             </MagneticButton>
           </Reveal>
 

@@ -63,7 +63,7 @@ export default function Home() {
 
 /* ---------- HERO ---------- */
 function Hero() {
-  const words = ["Modern", "care,", "reimagined", "for", "you."];
+  const words = ["Better", "care,", "reimagined", "for", "you."];
 
   return (
     <section className="relative overflow-hidden">
@@ -121,14 +121,14 @@ function Hero() {
           <Reveal delay={0.7}>
             <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
               A multi-specialty clinic where world-class doctors, calm spaces,
-              and intelligent technology come together , so you actually look
-              forward to your appointment.
+              and seamless technology come together , so you actually look
+              forward to your visit.
             </p>
           </Reveal>
 
           <Reveal delay={0.8} className="flex flex-wrap items-center gap-3">
             <MagneticButton to="/contact" primary>
-              Book Consultation
+              Book Your Visit
             </MagneticButton>
             <MagneticButton to="#story">
               <PlayCircle className="w-5 h-5 text-primary" /> Watch Our Story
@@ -220,7 +220,7 @@ function Hero() {
                   <span className="relative inline-flex rounded-full w-2.5 h-2.5 bg-emerald-500" />
                 </span>
                 <p className="text-[11px] sm:text-xs font-semibold text-foreground whitespace-nowrap">
-                  Open · 8AM , 7PM
+                  Open · 8AM - 7PM
                 </p>
               </div>
             </motion.div>
@@ -404,10 +404,10 @@ function ShowDontTell() {
       <Reveal className="max-w-3xl space-y-4 mb-12 sm:mb-16">
         <SectionEyebrow>Why Klaria</SectionEyebrow>
         <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tighter text-foreground text-balance leading-[0.95]">
-          Care that finally <Underlined>feels</Underlined> modern.
+          Care that <Underlined>respects</Underlined> your time.
         </h2>
         <p className="text-muted-foreground text-lg max-w-xl">
-          We rebuilt the clinic from the ground up , every wait, every form,
+          We rebuilt the clinic from the ground up; every wait, every form,
           every conversation.
         </p>
       </Reveal>
@@ -742,7 +742,7 @@ function ServicesHighlight() {
         <Reveal className="max-w-2xl space-y-4">
           <SectionEyebrow>Specialties</SectionEyebrow>
           <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground text-balance">
-            One clinic. Every specialty.
+            One space. Six Practices.
           </h2>
         </Reveal>
         {items.map((it, i) => (
@@ -823,7 +823,7 @@ function DoctorsMarquee() {
         </Reveal>
         <Reveal delay={0.1} className="lg:col-span-5">
           <p className="text-muted-foreground text-lg">
-            Meet the team in the middle of doing the thing they love most,
+            Meet the team in the middle of doing what they love most,
             taking care of people. Each specialist, a master at their craft.
           </p>
         </Reveal>
